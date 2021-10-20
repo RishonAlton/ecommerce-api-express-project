@@ -14,6 +14,9 @@ const cors = require('cors')
 const xss = require('xss-clean')
 const mongoSanitize = require('express-mongo-sanitize')
 
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+
 const connectDB = require('./DB/connect')
 
 const authRouter = require('./Routes/auth')
@@ -24,6 +27,9 @@ const orderRouter = require('./Routes/order')
 
 const notFoundRoute = require('./Middleware/not-found')
 const errorHandler = require('./Middleware/error-handler')
+
+
+const swaggerDocument = YAML.load('./swagger.yaml')
 
 
 app.set('trust proxy', 1)
@@ -39,6 +45,9 @@ app.use(express.static('./Public'))
 
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(fileUpload())
+
+
+app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 
 app.use('/api/auth', authRouter)

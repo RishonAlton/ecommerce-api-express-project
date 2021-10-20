@@ -1,0 +1,665 @@
+openapi: 3.0.0
+info:
+  title: E-Commerce API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://ecommerce-store-express-api.herokuapp.com/api
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: John
+              email: john@gmail.com
+              password: password
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: john@gmail.com
+              password: password
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout User
+      operationId: LogoutUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Users
+      summary: Get Specific User
+      operationId: GetSpecificUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/showMe:
+    get:
+      tags:
+        - Users
+      summary: Show Current User
+      operationId: ShowCurrentUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/updateUser:
+    patch:
+      tags:
+        - Users
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+            example:
+              name: John
+              email: john25@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/updateUserPassword:
+    patch:
+      tags:
+        - Users
+      summary: Update User Password
+      operationId: UpdateUserPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserPasswordRequest'
+            example:
+              oldPassword: password
+              newPassword: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products:
+    post:
+      tags:
+        - Product
+      summary: Create Product
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+            example:
+              name: Accent Chair
+              price: 25999
+              image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+              colors:
+                - '#ff0000'
+                - '#00ff00'
+                - '#0000ff'
+              company: Marcos
+              description: A stylish, comfortable chair. Best for office use.
+              category: Office
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Product
+      summary: Get all Products
+      operationId: GetallProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product ID
+    get:
+      tags:
+        - Product
+      summary: Get Specific Product
+      operationId: GetSpecificProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Product
+      summary: Update Product
+      operationId: UpdateProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+            example:
+              name: Leather Chair
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Product
+      summary: Delete Product
+      operationId: DeleteProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/uploadImage:
+    post:
+      tags:
+        - Product
+      summary: Upload Product Image
+      operationId: UploadProductImage
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /reviews:
+    post:
+      tags:
+        - Review
+      summary: Create Review
+      operationId: CreateReview
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReviewRequest'
+            example:
+              rating: 5
+              title: Perfect Buy
+              comment: Bought this a year ago and I still love it!
+              product: 616e9c25d4b88387bc7f327e
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Review
+      summary: Get All Reviews
+      operationId: GetAllReviews
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /reviews/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The review ID
+    get:
+      tags:
+        - Review
+      summary: Get Specific Review
+      operationId: GetSpecificReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Review
+      summary: Update Review
+      operationId: UpdateReview
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReviewRequest'
+            example:
+              rating: 4
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Review
+      summary: Delete Review
+      operationId: DeleteReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders:
+    post:
+      tags:
+        - Order
+      summary: Create Order
+      operationId: CreateOrder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            example:
+              tax: 399
+              shippingFee: 499
+              items:
+                - name: Vase Table
+                  price: 2599
+                  image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+                  quantity: 34
+                  product: 616e9c25d4b88387bc7f327e
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Order
+      summary: Get Current User Orders
+      operationId: GetCurrentUserOrders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders/all:
+    get:
+      tags:
+        - Order
+      summary: Get All Orders
+      operationId: GetAllOrders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The order ID
+    get:
+      tags:
+        - Order
+      summary: Get Specific Order
+      operationId: GetSpecificOrder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Order
+      summary: Update Order
+      operationId: UpdateOrder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+            example:
+              paymentIntentID: 8ctgl4758l3b8128fblfc2196bhgd
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: John
+        email: john@gmail.com
+        password: password
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: john@gmail.com
+        password: password
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: John
+        email: john25@gmail.com
+    UpdateUserPasswordRequest:
+      title: UpdateUserPasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        oldPassword: password
+        newPassword: secret
+    CreateProductRequest:
+      title: CreateProductRequest
+      required:
+        - name
+        - price
+        - image
+        - colors
+        - company
+        - description
+        - category
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+        image:
+          type: string
+        colors:
+          type: array
+          items:
+            type: string
+          description: ''
+        company:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+      example:
+        name: Accent Chair
+        price: 25999
+        image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+        colors:
+          - '#ff0000'
+          - '#00ff00'
+          - '#0000ff'
+        company: Marcos
+        description: A stylish, comfortable chair. Best for office use.
+        category: Office
+    UpdateProductRequest:
+      title: UpdateProductRequest
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Leather Chair
+    CreateReviewRequest:
+      title: CreateReviewRequest
+      required:
+        - rating
+        - title
+        - comment
+        - product
+      type: object
+      properties:
+        rating:
+          type: integer
+          format: int32
+        title:
+          type: string
+        comment:
+          type: string
+        product:
+          type: string
+      example:
+        rating: 5
+        title: Perfect Buy
+        comment: Bought this a year ago and I still love it!
+        product: 616e9c25d4b88387bc7f327e
+    UpdateReviewRequest:
+      title: UpdateReviewRequest
+      required:
+        - rating
+      type: object
+      properties:
+        rating:
+          type: integer
+          format: int32
+      example:
+        rating: 4
+    CreateOrderRequest:
+      title: CreateOrderRequest
+      required:
+        - tax
+        - shippingFee
+        - items
+      type: object
+      properties:
+        tax:
+          type: integer
+          format: int32
+        shippingFee:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+          description: ''
+      example:
+        tax: 399
+        shippingFee: 499
+        items:
+          - name: Vase Table
+            price: 2599
+            image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+            quantity: 34
+            product: 616e9c25d4b88387bc7f327e
+    Item:
+      title: Item
+      required:
+        - name
+        - price
+        - image
+        - quantity
+        - product
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+        image:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        product:
+          type: string
+      example:
+        name: Vase Table
+        price: 2599
+        image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+        quantity: 34
+        product: 616e9c25d4b88387bc7f327e
+    UpdateOrderRequest:
+      title: UpdateOrderRequest
+      required:
+        - paymentIntentID
+      type: object
+      properties:
+        paymentIntentID:
+          type: string
+      example:
+        paymentIntentID: 8ctgl4758l3b8128fblfc2196bhgd
+tags:
+  - name: Auth
+  - name: Users
+  - name: Product
+  - name: Review
+  - name: Order
